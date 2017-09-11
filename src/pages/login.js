@@ -8,6 +8,7 @@ import logonPwd from '../assets/images/logon_pwd.png';
 import helpQR from '../assets/images/help_logo.png';
 import {Utils} from '../Utils/utils.js';
 import * as loginService from '../api/service/loginService';
+import Dialog from 'material-ui/Dialog';
 
 // import SelectMenu from 'components/SelectMenu';
 
@@ -24,6 +25,9 @@ export default class LoginPage extends Component {
             .handleLogin
             .bind(this);
         this._loginData = {};
+        this.state = {
+            open:true
+        };
     }
 
     handleTelephoneNumber(telephoneValue) {
@@ -74,6 +78,12 @@ export default class LoginPage extends Component {
                             登录
                         </div>
                     </div>
+                    {/* <Dialog
+                        modal={false}
+                        open={this.state.open}
+                        onRequestClose={this.handleClose}>
+                        The actions in this window were passed in as an array of React objects.
+                    </Dialog> */}
                 </div>
             </MuiThemeProvider>
         )

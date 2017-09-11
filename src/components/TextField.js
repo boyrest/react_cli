@@ -28,6 +28,7 @@ export default class TextField extends Component {
         };
         this.isNeedPhoneRightImage = '';
         this.handleFocus = this.handleFocus.bind(this);
+        this.time= new Date().getTime().toString();
     }
 
     /**
@@ -172,8 +173,10 @@ export default class TextField extends Component {
                 <label
                     className={this.state.hasValue||this.state.focus
                     ? 'float-text-title'
-                    : 'float-text'}>{this.props.floatingLabelText}</label>
+                    : 'float-text'} for={'inputLable'+this.time}>{this.props.floatingLabelText}</label>
                 <input
+                    name={'inputLable'+this.time}
+                    id={'inputLable'+this.time}
                     type={this.props.type}
                     value={this.state.value}
                     onChange={this.handleInpuChange}
