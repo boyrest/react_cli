@@ -1,6 +1,31 @@
 .text-field{
     margin-bottom: 25px;
     position: relative;
+    .phone-right-image{
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        width: 16px;
+        height: auto;
+    }
+    .error-message{
+        font-size: 12px;
+        color: #DB1616;
+        padding-left: 16px;
+        padding-top: 6px;
+        position: absolute;
+        left: 0;
+        bottom: -19px;
+    }
+    .hide-element{
+        display: none;
+    }
+    .show-element{
+        display: block;
+    }
+    .error-boder{
+        border-bottom: 1px solid #DB1616;
+    }
     .text-field-header{
         height: 23px;
         position: absolute;
@@ -32,7 +57,8 @@
         left: 31px;
         color: #fff;
         top: 9px; 
-        transition: top font-size 0.5s ;
+        transition: top font-size 1s ;
+        transition-timing-function: ease-in;
     }
 
     .float-text-title{
@@ -43,6 +69,7 @@
         left: 31px;
         color: #fff;
         top: -11px; 
-        transition: top font-size 0.5s ;
+        transition: top font-size 1s;
+        transition-timing-function: ease-in;
     }
 }
