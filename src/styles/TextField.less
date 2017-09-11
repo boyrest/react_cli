@@ -1,0 +1,48 @@
+.text-field{
+    margin-bottom: 25px;
+    position: relative;
+    .text-field-header{
+        height: 23px;
+        position: absolute;
+        left: 15px;
+        top: 7px;
+        transform: translateX(-50%);
+    }
+    input{
+        border-bottom: 1px solid #979797;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        height: 40px;
+        background-color: transparent;
+        width: 100%;
+        padding-left: 30px;
+        color: white;
+        font-size: 14px;
+        font-family: 'RobotoLight';
+        &:focus{
+            outline: none;
+        }
+    }
+    .float-text{
+        position: absolute;
+        color: white;
+        font-family: 'RobotoLight';
+        font-size: 14px;
+        left: 31px;
+        color: #fff;
+        top: 9px; 
+        transition: top font-size 0.5s ;
+    }
+
+    .float-text-title{
+        position: absolute;
+        color: white;
+        font-family: 'RobotoLight';
+        font-size: 10px;
+        left: 31px;
+        color: #fff;
+        top: -11px; 
+        transition: top font-size 0.5s ;
+    }
+}

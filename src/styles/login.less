@@ -1,0 +1,47 @@
+@import "./mixin";
+
+#logon{
+    background: url(../assets/images/bg_logon.png) no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    height: @full-height;
+    padding-top: 20px;
+    .register{
+        height: 44px;
+        line-height: 44px;
+        padding-right: 30px;
+        font-size: 16px;
+        color: white;
+        text-align: right;
+        font-weight: 600;
+    }
+    
+    .img-container{
+        margin-top: 10px;
+        height: 22px;
+        text-align: center;
+        .logo-img{
+            width: 215px;
+            height: 22px;
+        }
+    }
+    .login-input{
+        height:calc(~"100% - 156px");
+        padding:28.4% 11% 0;   
+    }
+    .help-section{
+        header{
+            text-align: center;
+            font-size: 10px;
+            color: #D8D8D8;
+            margin-bottom: 25px;
+        }
+        .helpQR-container{
+            text-align: center;
+            img{
+                height: 124px;
+                width: 124px;
+            }
+        }
+    }
+}

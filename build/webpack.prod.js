@@ -21,31 +21,38 @@ module.exports = {
         alias: {
             components: resolve(__dirname, '../src/components'),
             pages: resolve(__dirname + '../src/pages'),
-            api: resolve(__dirname + '../src/'),
-            styles: resolve(__dirname + '../src/styles')
+            api: resolve(__dirname + '../src/api'),
+            styles: resolve(__dirname + '../src/styles'),
+            config: resolve(__dirname + '../src/config')
         }
     },
     module: {
         rules: [
             {
-                test: /\.scss$/,
-                use: [
-                    'style-loader', {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    }, {
-                        loader: 'postcss-loader',
-                        options: {
-                            //parser: 'postcss-js',
-                            plugins: () => {
-                                require('autoprefixer')()
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            }, {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1
                             }
-                        }
-                    },
-                    'sass-loader'
-                ]
+                        }, {
+                            loader: 'postcss-loader',
+                            options: {
+                                //parser: 'postcss-js',
+                                plugins: () => {
+                                    require('autoprefixer')()
+                                }
+                            }
+                        },
+                        'less-loader'
+                    ]
+                })
             }, {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
@@ -58,12 +65,36 @@ module.exports = {
                         plugins: ['react-html-attrs']
                     }
                 }
+            }, {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/[name]-[hash].[ext]'
+                        }
+                    }
+                ]
+            }, {
+                test: /\.(ttf|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'fonts/[name]-[hash].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
         new WebpackDelPlugin({
-            match: join(distDir, '*.*')
+            match:[
+                join(distDir, '*.*'),
+                join(resolve(distDir,'assets'), '*.*'),
+                join(resolve(distDir,'fonts'), '*.*')
+            ]
         }),
         // 定义环境变量为开发环境
         new webpack.DefinePlugin({
@@ -72,10 +103,8 @@ module.exports = {
         }),
         // 提取css
         new ExtractTextPlugin('vendor.[hash].css'),
-        // // 根据入口文件，提取重复引用的公共代码类库，打包到单独文件中
-        // new webpack
-        //     .optimize
-        //     .OccurenceOrderPlugin(),
+        // // 根据入口文件，提取重复引用的公共代码类库，打包到单独文件中 new webpack     .optimize
+        // .OccurenceOrderPlugin(),
         new webpack
             .optimize
             .CommonsChunkPlugin({

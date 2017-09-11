@@ -11,7 +11,7 @@ const WebpackDelPlugin = require('webpack-del-plugin');
 const PORT = 9000;
 
 module.exports = {
-    entry:  {
+    entry: {
         js: `${srcDir}/main.js`,
         vendor: ['react', 'classnames', 'react-router', 'react-dom']
     },
@@ -26,24 +26,27 @@ module.exports = {
         inline: true,
         contentBase: distDir,
         // compress: true,
-        port: PORT
+        port: PORT,
+        host: "0.0.0.0"
     },
     resolve: {
         alias: {
             components: resolve(__dirname, '../src/components'),
             pages: resolve(__dirname + '../src/pages'),
-            api: resolve(__dirname + '../src/'),
-            styles: resolve(__dirname + '../src/styles')
+            api: resolve(__dirname + '../src/api'),
+            styles: resolve(__dirname + '../src/styles'),
+            config: resolve(__dirname + '../src/config')
         }
     },
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
+            }, {
+                test: /\.less$/,
                 use: [
-                    {
-                        loader: "style-loader"
-                    }, {
+                    'style-loader', {
                         loader: "css-loader",
                         options: {
                             sourceMap: true,
@@ -52,14 +55,13 @@ module.exports = {
                     }, {
                         loader: 'postcss-loader',
                         options: {
-                            //parser: 'postcss-js',
                             plugins: () => {
                                 require('autoprefixer')()
                             },
                             sourceMap: true
                         }
                     }, {
-                        loader: "sass-loader",
+                        loader: "less-loader",
                         options: {
                             sourceMap: true
                         }
@@ -77,12 +79,36 @@ module.exports = {
                         plugins: ['react-html-attrs']
                     }
                 }
+            }, {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/[name]-[hash].[ext]'
+                        }
+                    }
+                ]
+            }, {
+                test: /\.(ttf|otf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'fonts/[name]-[hash].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
         new WebpackDelPlugin({
-            match: join(distDir, '*.*')
+            match: [
+                join(distDir, '*.*'),
+                join(resolve(distDir, 'assets'), '*.*'),
+                join(resolve(distDir, 'fonts'), '*.*')
+            ]
         }),
         new webpack.HotModuleReplacementPlugin(),
 
@@ -91,8 +117,7 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('development'),
             IS_DEVELOPMETN: true
         }),
-        // 提取css
-        new ExtractTextPlugin('vendor.[hash].css'),
+
         // 根据入口文件，提取重复引用的公共代码类库，打包到单独文件中 new webpack.optimize.OccurenceOrderPlugin(),
         new webpack
             .optimize
@@ -100,12 +125,10 @@ module.exports = {
                 name: 'vendor', // 入口文件名
                 filename: 'vendor.bundle.js', // 打包后的文件名
             }),
-        /* 压缩优化代码结束*/
+
         new HtmlWebpackPlugin({
             template: resolve(__dirname, '../src/index.html')
         }),
-        new OpenBrowserPlugin({url: `http://localhost:${PORT}/`}),
-        // // 分析代码
-        // new BundleAnalyzerPlugin({analyzerPort: 8082})
+        new OpenBrowserPlugin({url: `http://localhost:${PORT}/`})
     ]
 }
