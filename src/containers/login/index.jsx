@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router'
 import './login.less';
 
 import logoImg from '../../assets/images/logo.png';
@@ -48,7 +49,9 @@ export default class Login extends Component {
                 valid: false
             }
         ];
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.shouldComponentUpdate = PureRenderMixin
+            .shouldComponentUpdate
+            .bind(this);
     }
 
     /**
@@ -100,7 +103,7 @@ export default class Login extends Component {
                 .passwordInput
                 .setErrorMessage();
             this.setState({valid: false});
-       }
+        }
     }
 
     logonFailCallBack(data) {
@@ -133,7 +136,7 @@ export default class Login extends Component {
         return (
             <div id="logon">
                 <header class="register">
-                    注册
+                    <Link to="/register">注册</Link>
                 </header>
                 <div class="img-container"><img class="logo-img" src={logoImg}/></div>
                 <div class="login-input">

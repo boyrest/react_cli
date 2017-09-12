@@ -16,7 +16,7 @@ module.exports = {
         vendor: ['react', 'classnames', 'react-router', 'react-dom']
     },
     output: {
-        filename: '[name].js',
+        filename: '[name].[hash].js',
         path: distDir
     },
     devtool: "eval-source-map",

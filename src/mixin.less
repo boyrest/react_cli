@@ -1,37 +1,42 @@
 //变量设置
-@full-height:100%;
-
-*{
-	box-sizing: border-box;
+@full-height: 100%;
+* {
+    box-sizing: border-box;
 }
-html{
+
+html {
     height: @full-height;
 }
 
-body{
+body {
     height: @full-height;
     padding: 0;
     margin: 0;
-	font-family: 'Hiragino';
-	box-sizing: border-box;
+    font-family: 'Hiragino';
+    box-sizing: border-box;
 }
 
-#root{
+#root {
     height: @full-height;
 }
+
 
 /*
 * Hiragino 用于显示中文内容，不加粗效果
 * HiraginoBold 用于中文加粗，如：标题
 */
+
 @font-face {
-	font-family: 'Hiragino';
-	src: url('./assets/fonts/Hiragino+Sans+GB+W3.otf');
+    font-family: 'Hiragino';
+    src: url('./assets/fonts/Hiragino+Sans+GB+W3.otf');
 }
+
 @font-face {
-	font-family: 'HiraginoBold';
-	src: url('./assets/fonts/Hiragino+Sans+GB+W6.otf');
+    font-family: 'HiraginoBold';
+    src: url('./assets/fonts/Hiragino+Sans+GB+W6.otf');
 }
+
+
 /*
 *
 * Roboto 用来显示英文和数字
@@ -41,26 +46,62 @@ body{
 * RobotoBold分配的关键字：bold   分配的数字：600,700
 *
 */
+
 @font-face {
-	font-family: 'RobotoLight';
-	src: url('./assets/fonts/Roboto-Light.ttf');
+    font-family: 'RobotoLight';
+    src: url('./assets/fonts/Roboto-Light.ttf');
 }
+
 @font-face {
-	font-family: 'RobotoRegular';
-	src: url('./assets/fonts/Roboto-Regular.ttf');
+    font-family: 'RobotoRegular';
+    src: url('./assets/fonts/Roboto-Regular.ttf');
 }
+
 @font-face {
-	font-family: 'RobotoMedium';
-	src: url('./assets/fonts/Roboto-Medium.ttf');
+    font-family: 'RobotoMedium';
+    src: url('./assets/fonts/Roboto-Medium.ttf');
 }
+
 @font-face {
-	font-family: 'RobotoBold';
-	src: url('./assets/fonts/Roboto-Bold.ttf');
+    font-family: 'RobotoBold';
+    src: url('./assets/fonts/Roboto-Bold.ttf');
 }
+
+
 /*
 * CaviarDreamsBold用来显示IntraMirror
 */
+
 @font-face {
-	font-family: 'CaviarDreamsBold';
-	src: url('./assets/fonts/CaviarDreams_Bold.ttf');
+    font-family: 'CaviarDreamsBold';
+    src: url('./assets/fonts/CaviarDreams_Bold.ttf');
+}
+
+a{
+	color: white;
+}
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+a:active {
+    text-decoration: none;
+	color: white;
+}
+
+a:focus {
+    text-decoration: none;
+	color: white;
+	outline: none;
 }
