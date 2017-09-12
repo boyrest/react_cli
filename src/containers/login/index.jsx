@@ -135,11 +135,11 @@ export default class Login extends Component {
     render() {
         return (
             <div id="logon">
-                <header class="register">
+                <header className="register">
                     <Link to="/register">注册</Link>
                 </header>
-                <div class="img-container"><img class="logo-img" src={logoImg}/></div>
-                <div class="login-input">
+                <div className="img-container"><img className="logo-img" src={logoImg}/></div>
+                <div className="login-input">
                     <TextField
                         floatingLabelText="手机号*"
                         type="telephone"
@@ -153,14 +153,14 @@ export default class Login extends Component {
                         handleParentChangeEvent={this.handlePassword}
                         postValidInfo={this.postValidInfo}
                         ref="passwordInput"/>
-                    <div class="help-section">
+                    <div className="help-section">
                         <header>需要帮助请扫描下面的二维码联系客服</header>
-                        <div class="helpQR-container">
+                        <div className="helpQR-container">
                             <img src={helpQR} alt="customerHelp"/>
                         </div>
                     </div>
                     <button
-                        class="login-button"
+                    className="login-button"
                         onClick={this.handleLogin}
                         disabled={this.state.valid
                         ? ''

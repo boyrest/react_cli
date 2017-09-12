@@ -80,25 +80,25 @@ export default class Register extends Component {
     render() {
         return (
             <div id="register">
-                <div class="black-bg"></div>
-                <div class="fields-container">
-                    <img class="logo-img" src={logoImg}/>
-                    <img class="back-arrow" src={backArrowImg} onClick={this.backTologinPage}/>
-                    <div class="fields">
+                <div className="black-bg"></div>
+                <div className="fields-container">
+                    <img className="logo-img" src={logoImg}/>
+                    <img className="back-arrow" src={backArrowImg} onClick={this.backTologinPage}/>
+                    <div className="fields">
                         {this.state.fields.map((field, index) => {
                                 return <TextField
                                     floatingLabelText={field.floatingLabelText}
                                     className="text-field"
                                     fullWidth={true}
                                     key={index}
-                                    underlineFocusStyle={{}}/>
+                                    underlineFocusStyle={{transform:'none',borderColor: 'white',borderBottom:'1.25px solid white'}}/>
                                 })
                         }
-                    </div>
-                    <button class="submit-button">
-                        提交
-                    </button>
+                    </div>     
                 </div>
+                <button className="submit-button">
+                        提交
+                </button>
             </div>
         )
     }

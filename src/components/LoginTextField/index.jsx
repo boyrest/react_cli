@@ -165,13 +165,13 @@ export default class TextField extends Component {
         this.isNeedPhoneRightImage = ConstantVariable.inputType.TELEPHONE === this.props.type
             ? <img
                     src={phoneRightImg}
-                    class={this.state.showRightImage
+                    className={this.state.showRightImage
                     ? 'phone-right-image'
                     : 'phone-right-image hide-element'}/>
             : '';
         return (
-            <div class="text-field">
-                <img src={this.props.headerImg} class="text-field-header"/>
+            <div className="login-text-field">
+                <img src={this.props.headerImg} className="text-field-header"/>
                 <label
                     className={this.state.hasValue||this.state.focus
                     ? 'float-text-title'
@@ -183,12 +183,12 @@ export default class TextField extends Component {
                     value={this.state.value}
                     onChange={this.handleInpuChange}
                     onBlur={this.handleBlurEvent}
-                    class={this.state.isValid||(this.state.errorMessage === apiConfig.error.chechEmailAndPwd)
+                    className={this.state.isValid||(this.state.errorMessage === apiConfig.error.chechEmailAndPwd)
                     ? ''
                     : 'error-boder'}
                     onInput={this.handleInputEvent} onFocus={this.handleFocus}/> {this.isNeedPhoneRightImage}
                 <span
-                    class={this.state.isValid&&(this.state.errorMessage !==apiConfig.error.chechEmailAndPwd)
+                className={this.state.isValid&&(this.state.errorMessage !==apiConfig.error.chechEmailAndPwd)
                     ? 'hide-element'
                     : 'error-message'}>{this.state.errorMessage}</span>
             </div>
