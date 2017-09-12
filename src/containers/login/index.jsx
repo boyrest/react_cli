@@ -94,7 +94,8 @@ export default class Login extends Component {
             }, data.user));
             CommonAction.setItemPlugin("user_info", jsonDataStr, () => {
                 CommonAction.setSessionToken(data.token, () => {
-                    this.location = "localhost:8080/www/feature/homePage/homePage.html";
+                   // this.location = "localhost:8080/www/feature/homePage/homePage.html";
+                    console.log("loginSuccess");
                 }, () => {});
             }, () => {});
         } else if (data.status === -1009) {
@@ -115,8 +116,7 @@ export default class Login extends Component {
     }
 
     postValidInfo(validInfo) {
-        this
-            .validInfo
+        this.validInfo
             .forEach(function (item) {
                 if (item.type === validInfo.type) {
                     item.valid = validInfo.valid;

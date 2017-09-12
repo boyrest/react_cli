@@ -13,6 +13,14 @@ function setItemPlugin(name, value, setItemSuccess, setItemError) {
     }
 }
 
+function getItemPlugin(name, getItemSuccess, getItemError) {
+    if (apiConfig.isBrowser) {
+        getItemSuccess(localStorage.getItem(name));
+    } else {
+        //CordovaLocalStorage.getItem(name, getItemSuccess, getItemError);
+    }
+}
+
 /**set session token**/
 function setSessionToken(value, successCallback, failCallBack) {
     var key = apiConfig.token || "token";
@@ -23,4 +31,4 @@ function setSessionToken(value, successCallback, failCallBack) {
     })();
 }
 
-export {setItemPlugin,setSessionToken};
+export {setItemPlugin,setSessionToken,getItemPlugin};

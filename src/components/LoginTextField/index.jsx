@@ -6,6 +6,7 @@ import * as loginService from "../../api/service/loginService";
 import phoneRightImg from '../../assets/images/phone-right.png';
 import {apiConfig} from "../../api/apiConfig";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import * as CommonAction from '../../Utils/common';
 
 export default class TextField extends Component {
     constructor(props) {
@@ -25,17 +26,56 @@ export default class TextField extends Component {
             showRightImage: false,
             isValid: true,
             errorMessage: '',
-            focus:false
+            focus: false
         };
         this.isNeedPhoneRightImage = '';
-        this.handleFocus = this.handleFocus.bind(this);
-        this.time= new Date().getTime().toString();
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.handleFocus = this
+            .handleFocus
+            .bind(this);
+        this.time = new Date()
+            .getTime()
+            .toString();
+        this.shouldComponentUpdate = PureRenderMixin
+            .shouldComponentUpdate
+            .bind(this);
+        //如果type是telephone则执行获取存储storage
+        console.log("constructor");
+    }
+    componentWillMount(){
+        console.log("componentWillMount");
+        if(ConstantVariable.inputType.TELEPHONE === this.props.type){
+            this.quickLog();
+        }
+    }
+    /**
+     *@override
+     */
+    componentDidMount(){
+        console.log("componentDidMount");
+        if(ConstantVariable.inputType.TELEPHONE === this.props.type && this.state.value){
+            this._handleTelephoneValidation();
+        }
+    }
+    /**
+     * 预先给账号赋值
+     */
+    quickLog() {
+        CommonAction.getItemPlugin("user_info", (datas) =>{
+            const data = JSON.parse(datas);
+            if (data) {
+                if (data.myUsername) {
+                    this.setState({
+                        hasValue: true,
+                        value: data.myUsername,
+                    });
+                }
+            }
+        }, null)
     }
 
     /**
      * 处理组件的值的变化行为
-     * @param {*} e 
+     * @param {*} e
      */
     handleInpuChange(e) {
         this.setState({
@@ -52,19 +92,15 @@ export default class TextField extends Component {
     /**
      * 处理focus
      */
-    handleFocus(){
-        this.setState({
-            focus: true
-        });
+    handleFocus() {
+        this.setState({focus: true});
     }
 
     /**
      * 处理组件的blur事件
      */
     handleBlurEvent() {
-        this.setState({
-            focus: false
-        });
+        this.setState({focus: false});
 
         if (ConstantVariable.inputType.TELEPHONE === this.props.type) {
             this._handleTelephoneValidation();
@@ -114,19 +150,27 @@ export default class TextField extends Component {
                                 break;
 
                         }
-                        this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
+                        this
+                            .props
+                            .postValidInfo({type: ConstantVariable.inputType.TELEPHONE, valid: this.state.isValid});
                     })
                     .catch((ex) => {
                         this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
-                        this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
+                        this
+                            .props
+                            .postValidInfo({type: ConstantVariable.inputType.TELEPHONE, valid: this.state.isValid});
                     });
             } else {
                 this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
-                this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
+                this
+                    .props
+                    .postValidInfo({type: ConstantVariable.inputType.TELEPHONE, valid: this.state.isValid});
             }
         } else {
             this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.phoneRequired});
-            this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
+            this
+                .props
+                .postValidInfo({type: ConstantVariable.inputType.TELEPHONE, valid: this.state.isValid});
         }
     }
 
@@ -150,13 +194,15 @@ export default class TextField extends Component {
         } else {
             this.setState({showRightImage: false, isValid: true, errorMessage: ''});
         }
-        this.props.postValidInfo({type:ConstantVariable.inputType.PASSWORD,valid:this.state.isValid});
+        this
+            .props
+            .postValidInfo({type: ConstantVariable.inputType.PASSWORD, valid: this.state.isValid});
     }
 
     /**
-     * 
+     *
      */
-    setErrorMessage(message){
+    setErrorMessage(message) {
         this.setState({isValid: false, errorMessage: apiConfig.error.chechEmailAndPwd});
     }
 
@@ -173,22 +219,24 @@ export default class TextField extends Component {
             <div className="login-text-field">
                 <img src={this.props.headerImg} className="text-field-header"/>
                 <label
-                    className={this.state.hasValue||this.state.focus
+                    className={this.state.hasValue || this.state.focus
                     ? 'float-text-title'
-                    : 'float-text'} for={'inputLable'+this.time}>{this.props.floatingLabelText}</label>
+                    : 'float-text'}
+                    for={'inputLable' + this.time}>{this.props.floatingLabelText}</label>
                 <input
-                    name={'inputLable'+this.time}
-                    id={'inputLable'+this.time}
+                    name={'inputLable' + this.time}
+                    id={'inputLable' + this.time}
                     type={this.props.type}
                     value={this.state.value}
                     onChange={this.handleInpuChange}
                     onBlur={this.handleBlurEvent}
-                    className={this.state.isValid||(this.state.errorMessage === apiConfig.error.chechEmailAndPwd)
+                    className={this.state.isValid || (this.state.errorMessage === apiConfig.error.chechEmailAndPwd)
                     ? ''
                     : 'error-boder'}
-                    onInput={this.handleInputEvent} onFocus={this.handleFocus}/> {this.isNeedPhoneRightImage}
+                    onInput={this.handleInputEvent}
+                    onFocus={this.handleFocus}/> {this.isNeedPhoneRightImage}
                 <span
-                className={this.state.isValid&&(this.state.errorMessage !==apiConfig.error.chechEmailAndPwd)
+                    className={this.state.isValid && (this.state.errorMessage !== apiConfig.error.chechEmailAndPwd)
                     ? 'hide-element'
                     : 'error-message'}>{this.state.errorMessage}</span>
             </div>
