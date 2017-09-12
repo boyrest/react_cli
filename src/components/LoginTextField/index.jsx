@@ -5,6 +5,7 @@ import {Utils} from '../../Utils/utils.js';
 import * as loginService from "../../api/service/loginService";
 import phoneRightImg from '../../assets/images/phone-right.png';
 import {apiConfig} from "../../api/apiConfig";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 export default class TextField extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ export default class TextField extends Component {
         this.isNeedPhoneRightImage = '';
         this.handleFocus = this.handleFocus.bind(this);
         this.time= new Date().getTime().toString();
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
     /**
@@ -91,7 +93,7 @@ export default class TextField extends Component {
             if (Utils.validateTelPhoneNumber(this.state.value)) {
                 loginService
                     .validUser({email: this.state.value})
-                    .then(function (data) {
+                    .then((data) => {
                         debugger;
                         switch (data.status) {
                             case 1:
@@ -113,11 +115,11 @@ export default class TextField extends Component {
 
                         }
                         this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
-                    }.bind(this))
-                    .catch(function (ex) {
+                    })
+                    .catch((ex) => {
                         this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
                         this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
-                    }.bind(this));
+                    });
             } else {
                 this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
                 this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});

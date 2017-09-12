@@ -14,6 +14,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import * as CommonAction from '../../Utils/common';
 import {apiConfig} from "../../api/apiConfig";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 // import SelectMenu from 'components/SelectMenu';
 
@@ -47,6 +48,7 @@ export default class Login extends Component {
                 valid: false
             }
         ];
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
     /**
@@ -81,8 +83,7 @@ export default class Login extends Component {
     }
 
     logonSuccessCallBack(data) {
-        debugger;
-        if (data.status == 1) {
+        if (data.status === 1) {
             var jsonDataStr = JSON.stringify($.extend({
                 myUsername: this._loginData.email,
                 myPassword: this._loginData.password,
@@ -90,10 +91,10 @@ export default class Login extends Component {
             }, data.user));
             CommonAction.setItemPlugin("user_info", jsonDataStr, () => {
                 CommonAction.setSessionToken(data.token, () => {
-                    window.location.href = "../homePage/homePage.html";
+                    this.location = "localhost:8080/www/feature/homePage/homePage.html";
                 }, () => {});
             }, () => {});
-        } else if (data.status == -1009) {
+        } else if (data.status === -1009) {
             this
                 .refs
                 .passwordInput
