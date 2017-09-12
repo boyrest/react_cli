@@ -38,37 +38,34 @@ export default class TextField extends Component {
         this.shouldComponentUpdate = PureRenderMixin
             .shouldComponentUpdate
             .bind(this);
-        //如果type是telephone则执行获取存储storage
-        console.log("constructor");
     }
-    componentWillMount(){
-        console.log("componentWillMount");
-        if(ConstantVariable.inputType.TELEPHONE === this.props.type){
-            this.quickLog();
-        }
-    }
+
     /**
      *@override
      */
-    componentDidMount(){
-        console.log("componentDidMount");
-        if(ConstantVariable.inputType.TELEPHONE === this.props.type && this.state.value){
+    componentWillMount() {
+        if (ConstantVariable.inputType.TELEPHONE === this.props.type) {
+            this.quickLog();
+        }
+    }
+
+    /**
+     *@override
+     */
+    componentDidMount() {
+        if (ConstantVariable.inputType.TELEPHONE === this.props.type && this.state.value) {
             this._handleTelephoneValidation();
         }
     }
+
     /**
      * 预先给账号赋值
      */
     quickLog() {
-        CommonAction.getItemPlugin("user_info", (datas) =>{
+        CommonAction.getItemPlugin("user_info", (datas) => {
             const data = JSON.parse(datas);
-            if (data) {
-                if (data.myUsername) {
-                    this.setState({
-                        hasValue: true,
-                        value: data.myUsername,
-                    });
-                }
+            if (data && data.myUsername) {
+                this.setState({hasValue: true, value: data.myUsername});
             }
         }, null)
     }
