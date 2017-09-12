@@ -9,7 +9,7 @@ const fs = require('fs-extra');
 
 module.exports = {
     entry: {
-        js: `${srcDir}/main.js`,
+        js: `${srcDir}/index.jsx`,        
         vendor: ['react', 'classnames', 'react-router', 'react-dom']
     },
     output: {
@@ -17,14 +17,8 @@ module.exports = {
         path: distDir,
         chunkFilename: '[name].[hash].js'
     },
-    resolve: {
-        alias: {
-            components: resolve(__dirname, '../src/components'),
-            pages: resolve(__dirname + '../src/pages'),
-            api: resolve(__dirname + '../src/api'),
-            styles: resolve(__dirname + '../src/styles'),
-            config: resolve(__dirname + '../src/config')
-        }
+    resolve:{
+        extensions:['', '.js','.jsx']
     },
     module: {
         rules: [
@@ -54,7 +48,7 @@ module.exports = {
                     ]
                 })
             }, {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',

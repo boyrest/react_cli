@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import '../styles/TextField.less';
-import {ConstantVariable} from "../constant/ConstantVariable";
-import {Utils} from '../Utils/utils.js';
-import * as loginService from "../api/service/loginService";
-import phoneRightImg from '../assets/images/phone-right.png';
-import {apiConfig} from "../api/apiConfig";
+import './TextField.less';
+import {ConstantVariable} from "../../constant/ConstantVariable";
+import {Utils} from '../../Utils/utils.js';
+import * as loginService from "../../api/service/loginService";
+import phoneRightImg from '../../assets/images/phone-right.png';
+import {apiConfig} from "../../api/apiConfig";
 
 export default class TextField extends Component {
     constructor(props) {
@@ -29,14 +29,6 @@ export default class TextField extends Component {
         this.isNeedPhoneRightImage = '';
         this.handleFocus = this.handleFocus.bind(this);
         this.time= new Date().getTime().toString();
-    }
-
-    /**
-     * override
-     */
-    shouldComponentUpdate(){
-        console.log("12345678");
-        return true;
     }
 
     /**
@@ -90,6 +82,7 @@ export default class TextField extends Component {
             this._handlePasswordValidation(false);
         }
     }
+
     /**
      * 处理账户登录的校验
      */
@@ -119,19 +112,19 @@ export default class TextField extends Component {
                                 break;
 
                         }
-                        //self.checkLogon(self.logonBtnFieldArr, null, 'logonBtn');
+                        this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
                     }.bind(this))
                     .catch(function (ex) {
                         this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
-                        //self.checkLogon(self.logonBtnFieldArr, null, 'logonBtn');
+                        this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
                     }.bind(this));
             } else {
-                // self.checkLogon(self.logonBtnFieldArr, null, 'logonBtn');
                 this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.telNumFormatError});
+                this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
             }
         } else {
-            // self.checkLogon(self.logonBtnFieldArr, null, 'logonBtn');
             this.setState({showRightImage: false, isValid: false, errorMessage: apiConfig.error.phoneRequired});
+            this.props.postValidInfo({type:ConstantVariable.inputType.TELEPHONE,valid:this.state.isValid});
         }
     }
 
@@ -155,7 +148,14 @@ export default class TextField extends Component {
         } else {
             this.setState({showRightImage: false, isValid: true, errorMessage: ''});
         }
-        //self.checkLogon(self.logonBtnFieldArr, null, 'logonBtn');
+        this.props.postValidInfo({type:ConstantVariable.inputType.PASSWORD,valid:this.state.isValid});
+    }
+
+    /**
+     * 
+     */
+    setErrorMessage(message){
+        this.setState({isValid: false, errorMessage: apiConfig.error.chechEmailAndPwd});
     }
 
     render() {
@@ -181,12 +181,12 @@ export default class TextField extends Component {
                     value={this.state.value}
                     onChange={this.handleInpuChange}
                     onBlur={this.handleBlurEvent}
-                    class={this.state.isValid
+                    class={this.state.isValid||(this.state.errorMessage === apiConfig.error.chechEmailAndPwd)
                     ? ''
                     : 'error-boder'}
                     onInput={this.handleInputEvent} onFocus={this.handleFocus}/> {this.isNeedPhoneRightImage}
                 <span
-                    class={this.state.isValid
+                    class={this.state.isValid&&(this.state.errorMessage !==apiConfig.error.chechEmailAndPwd)
                     ? 'hide-element'
                     : 'error-message'}>{this.state.errorMessage}</span>
             </div>
