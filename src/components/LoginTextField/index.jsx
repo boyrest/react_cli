@@ -66,6 +66,9 @@ export default class TextField extends Component {
             const data = JSON.parse(datas);
             if (data && data.myUsername) {
                 this.setState({hasValue: true, value: data.myUsername});
+                this
+                    .props
+                    .handleParentChangeEvent(data.myUsername);
             }
         }, null)
     }

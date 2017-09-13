@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router'
+import {Link,hashHistory} from 'react-router'
 import './login.less';
 
 import logoImg from '../../assets/images/logo.png';
@@ -75,6 +75,7 @@ export default class Login extends Component {
     }
 
     handleLogin() {
+        debugger;
         loginService
             .logon(this._loginData)
             .then((data) => {
@@ -87,6 +88,7 @@ export default class Login extends Component {
 
     logonSuccessCallBack(data) {
         if (data.status === 1) {
+            debugger;
             var jsonDataStr = JSON.stringify($.extend({
                 myUsername: this._loginData.email,
                 myPassword: this._loginData.password,
@@ -94,7 +96,9 @@ export default class Login extends Component {
             }, data.user));
             CommonAction.setItemPlugin("user_info", jsonDataStr, () => {
                 CommonAction.setSessionToken(data.token, () => {
-                    location.href= "http://localhost:8080/www/feature/homePage/homePage.html";
+                    //location.href= "http://localhost:8080/www/feature/homePage/homePage.html";
+                    debugger;
+                    hashHistory.push('/me');
                 }, () => {});
             }, () => {});
         } else if (data.status === -1009) {

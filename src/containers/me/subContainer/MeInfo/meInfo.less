@@ -1,0 +1,65 @@
+@import "../../../../mixin";
+#me-info-container {
+    .m-myoder {
+        padding: 24px 14px;
+        border-bottom: 1px solid #9B9B9B;
+        color: #000;
+        background-color: #FFF;
+        .lt {
+            font-size: 14px;
+            float: left;
+            font-family: "Hiragino";
+            color: #000;
+        }
+        .icon_link {
+            float: right;
+            font-size: 14px;
+            color: #000;
+            height: 19px;
+            line-height: 19px;
+            font-family: 'Hiragino'!important;
+        }
+        .order_list {
+            padding-right: 15px;
+            position: relative;
+            img {
+                position: absolute;
+                right: 0;
+                top: 4px;
+                height: 10px;
+            }
+        }
+        .order_state {
+            padding-top: 20px;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+            display: flex;
+            li {
+                flex: 1;
+                text-align: center;
+                list-style-type: none;
+                img {
+                    width: 32px;
+                    height: 26px;
+                }
+            }
+            #confirmed img {
+                width: 29px;
+                height: 26px;
+            }
+            #indelivery img {
+                width: 33px;
+                height: 26px;
+            }
+            #received img {
+                width: 26px;
+                height: 26px;
+            }
+            #canceled img {
+                width: 26px;
+                height: 26px;
+            }
+        }
+    }
+}

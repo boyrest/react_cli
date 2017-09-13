@@ -1,0 +1,50 @@
+@import "../../mixin";
+#me-container{
+    position: relative;
+    height: 100%;
+   
+    .header-container{
+        height: 260px;
+        width: 100%;
+        background: url(../../assets/images/bg_acount.png) no-repeat;
+        background-size: 100% 260px;
+        .cam1{
+            position: absolute;
+            width: 24%;
+            border-radius: 50%;
+            left: 50%;
+            top: 58px;
+            transform: translateX(-50%);
+        }
+        .cam2{
+            position: absolute;
+            top: 89px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .userName{
+            font-size: 14px;
+            font-family: 'RobotoMedium'!important;
+            display: inline-block;
+            position: absolute;
+            top: 167px;
+            color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    .back-icon{
+        top: 30px;
+        left: 24px;
+        position: absolute;
+        height: 15px;
+        width: 15px;
+    }
+    .setting-icon{
+        position: absolute;
+        right: 32px;
+        height: 15px;
+        width: 15px;
+        top: 30px;
+    }
+}
