@@ -1,5 +1,5 @@
-//const _host = "http://47.91.79.118:8083",//staging
-const _host = "http://47.91.79.57:8083", //production
+const _host = "http://47.91.79.118:8083",//staging
+//const _host = "http://47.91.79.57:8083", //production
 //const _host = "http://47.91.79.50:9000",//bad request
     baseServerUrl = _host + "/shoplus-buyer";
 const apiConfig = {

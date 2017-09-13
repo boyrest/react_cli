@@ -94,8 +94,7 @@ export default class Login extends Component {
             }, data.user));
             CommonAction.setItemPlugin("user_info", jsonDataStr, () => {
                 CommonAction.setSessionToken(data.token, () => {
-                   // this.location = "localhost:8080/www/feature/homePage/homePage.html";
-                    console.log("loginSuccess");
+                    location.href= "http://localhost:8080/www/feature/homePage/homePage.html";
                 }, () => {});
             }, () => {});
         } else if (data.status === -1009) {

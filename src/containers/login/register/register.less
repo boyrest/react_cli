@@ -1,6 +1,6 @@
-@import '../../mixin';
+@import '../../../mixin';
 #register {
-    background: url(../../assets/images/bg_regist.png) no-repeat;
+    background: url(../../../assets/images/bg_regist.png) no-repeat;
     background-size: 100%;
     background-attachment: fixed;
     min-height: @min-height;
@@ -38,6 +38,9 @@
         font-family: 'HiraginoBold';
         position: absolute;
         bottom: 0;
+        &:focus{
+            outline: none;
+        }
     }
     .fields-container {
         z-index: 2;
@@ -69,7 +72,7 @@
                 font-size: 14px;
                 color: white !important;
             }
-            input[type=text]{
+            input[type=text],input[type=password]{
                 padding-left: 18px !important;
                 color: white !important;
                 font-size: 14px !important;

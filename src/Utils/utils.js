@@ -60,6 +60,15 @@ const Utils = {
         return string.length + (chineseCharacters
             ? chineseCharacters.length
             : 0);
+    },
+
+    /**
+     * 验证邮箱是否合法
+     * @param email 邮箱
+     * @returns {boolean} 是否合法
+     */
+    validateEmail: function (email) {
+        return /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/.test(email);
     }
 
 }
