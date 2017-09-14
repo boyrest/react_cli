@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {hashHistory} from 'react-router';
-import './register.less';
+import './style.less';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import TextField from 'material-ui/TextField';
 import logoImg from '../../../assets/images/logo.png';

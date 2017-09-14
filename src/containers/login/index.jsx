@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link,hashHistory} from 'react-router'
-import './login.less';
+import './style.less';
 
 import logoImg from '../../assets/images/logo.png';
 import TextField from '../../components/LoginTextField';

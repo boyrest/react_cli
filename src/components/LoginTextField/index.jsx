@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './TextField.less';
+import './style.less';
 import {ConstantVariable} from "../../constant/ConstantVariable";
 import {Utils} from '../../Utils/utils.js';
 import * as loginService from "../../api/service/loginService";

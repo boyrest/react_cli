@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import './me.less';
-import MeInfo from './subContainer/MeInfo';
-import SettingInfo from './subContainer/SettingInfo';
-import ChangePassword from './subContainer/ChangePassword';
+import './style.less';
+import MeInfo from './subPage/MeInfo.jsx';
+import SettingInfo from './subPage/SettingInfo.jsx';
+import ChangePassword from './subPage/ChangePassword.jsx';
 import returnArrow from '../../assets/images/icon_returnArrow.png';
 import setIcon from '../../assets/images/icon_set.png';
 import * as CommonAction from '../../Utils/common';
@@ -54,6 +54,10 @@ export default class Me extends Component {
         this.setState({currentSubPage: 'SettingInfo'})
     }
 
+    goToChangePassword() {
+        this.setState({currentSubPage: 'ChangePassword'})
+    }
+
     render() {
         return (
             <div id="me-container">
@@ -65,7 +69,7 @@ export default class Me extends Component {
                     .bind(this)}/>
                 <img
                     src={setIcon}
-                    className="setting-icon"
+                    className={this.state.currentSubPage === 'MeInfo'?'setting-icon':'hidden-element'}
                     onClick={this
                     .goToSettingInfo
                     .bind(this)}/>
@@ -82,7 +86,10 @@ export default class Me extends Component {
                 <SettingInfo
                     show={this.state.currentSubPage === 'SettingInfo'
                     ? true
-                    : false}/>
+                    : false}
+                    handleChangePassword={this
+                    .goToChangePassword
+                    .bind(this)}/>
                 <ChangePassword
                     show={this.state.currentSubPage === 'ChangePassword'
                     ? true

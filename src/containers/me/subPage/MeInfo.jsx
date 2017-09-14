@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import './meInfo.less';
-import chevronRight from '../../../../assets/images/chevron-right.svg';
-import iconWallet from '../../../../assets/images/icon_Wallet.png';
-import iconScan from '../../../../assets/images/icon_scan.png';
-import iconBox from '../../../../assets/images/icon_Box.png';
-import iconTruck from '../../../../assets/images/icon_Truck.png';
-import iconChat from '../../../../assets/images/icon_Chat.png';
-import iconMoney from '../../../../assets/images/icon_Money.png';
+import './style.less';
+import chevronRight from '../../../assets/images/chevron-right.svg';
+import iconWallet from '../../../assets/images/icon_Wallet.png';
+import iconScan from '../../../assets/images/icon_scan.png';
+import iconBox from '../../../assets/images/icon_Box.png';
+import iconTruck from '../../../assets/images/icon_Truck.png';
+import iconChat from '../../../assets/images/icon_Chat.png';
+import iconMoney from '../../../assets/images/icon_Money.png';
 
 
 export default class MeInfo extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import okImg from '../../../assets/images/regSucPic.png';
-import './successRegister.less';
+import './style.less';
 import {hashHistory} from 'react-router';
 
 export default class SuccessRegister extends Component{
