@@ -97,8 +97,7 @@ export default class Login extends Component {
             CommonAction.setItemPlugin("user_info", jsonDataStr, () => {
                 CommonAction.setSessionToken(data.token, () => {
                     //location.href= "http://localhost:8080/www/feature/homePage/homePage.html";
-                    debugger;
-                    hashHistory.push('/me');
+                    hashHistory.push('/productList');
                 }, () => {});
             }, () => {});
         } else if (data.status === -1009) {
